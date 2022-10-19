@@ -1,10 +1,16 @@
 // REQUIRED PACKAGES
+const mysql = require('mysql2');
 const db = require("./db/connection");
 const inquirer = require("inquirer");
-require("console.table");
+const consoleTable = require("console.table");
 
 // ARRAY
 const employees = [];
+
+// CONNECTION BETWEEN SERVER AND DATABASE
+db.connect(function (err) {
+    if (err) throw err;
+});
 
 // START/MAIN MENU
 const mainMenu = () => {
@@ -143,16 +149,16 @@ const addRole = () => {
             },
         },
     ])
-    .then((answers) => {
-        console.log(answers);
-        const sql = "INSERT INTO role (title, salary, department_id) VALUES (?,?,?)";
-        const params = [answers.title, answers.salary, answers.department_id]
-        db.query(sql, params, function (err, results) {
-            if (err) throw err;
-            console.log(results);
-            mainMenu();
+        .then((answers) => {
+            console.log(answers);
+            const sql = "INSERT INTO role (title, salary, department_id) VALUES (?,?,?)";
+            const params = [answers.title, answers.salary, answers.department_id]
+            db.query(sql, params, function (err, results) {
+                if (err) throw err;
+                console.log(results);
+                mainMenu();
+            });
         });
-    });
 };
 
 // ADD EMPLOYEE
@@ -215,16 +221,16 @@ const addEmployee = () => {
             },
         },
     ])
-    .then((answers) => {
-        console.log(answers);
-        const sql = "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?)";
-        const params = [answers.first_name, answers.last_name, answers.role_id, answers.manager_id];
-        db.query(sql, params, function (err, results) {
-            if (err) throw err;
-            console.log(results);
-            mainMenu();
+        .then((answers) => {
+            console.log(answers);
+            const sql = "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?)";
+            const params = [answers.first_name, answers.last_name, answers.role_id, answers.manager_id];
+            db.query(sql, params, function (err, results) {
+                if (err) throw err;
+                console.log(results);
+                mainMenu();
+            });
         });
-    });
 };
 
 // UPDATE EMPLOYEE ROLE
@@ -259,16 +265,16 @@ const updateEmployeeRole = () => {
             },
         },
     ])
-    .then((answers) => {
-        console.log(answers);
-        const sql = "UPDATE employee SET role_id = ? WHERE employee_id = ?";
-        const params = [answers.role_id, answers.employee_id];
-        db.query(sql, params, function (err, results) {
-            if (err) throw err;
-            console.log(results);
-            mainMenu();
+        .then((answers) => {
+            console.log(answers);
+            const sql = "UPDATE employee SET role_id = ? WHERE employee_id = ?";
+            const params = [answers.role_id, answers.employee_id];
+            db.query(sql, params, function (err, results) {
+                if (err) throw err;
+                console.log(results);
+                mainMenu();
+            });
         });
-    });
 };
 
 mainMenu();
