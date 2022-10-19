@@ -68,3 +68,31 @@ const viewEmployees = () => {
         mainMenu;
     });
 };
+
+// ADD DEPARTMENT
+const addDepartment = () => {
+    inquirer.prompt([
+        {
+            name: 'name',
+            type: 'input',
+            message: 'What is the name of the department?',
+            validate: (name) => {
+                if (name) {
+                    return true;
+                } else {
+                    console.log("You must enter the department name");
+                    return false;
+                }
+            },
+        },
+    ])
+    .then((answers) => {
+        const sql = 'INSERT INTO department (name) VALUES (?)';
+        const params = [answers.name];
+        db.query(sql, params, function (err, results) {
+            if (err) throw err;
+            console.log(results);
+            mainMenu();
+        });
+    });
+};
