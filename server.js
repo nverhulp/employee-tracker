@@ -41,3 +41,12 @@ const mainMenu = () => {
         }
     });
 };
+
+// VIEW DEPARTMENTS
+const viewDepartments = () => {
+    db.query("SELECT * FROM department", function (err, results) {
+        if (err) throw err;
+        console.log(results);
+        mainMenu();
+    });
+};
