@@ -145,8 +145,80 @@ const addRole = () => {
     ])
     .then((answers) => {
         console.log(answers);
-        const sql = "INSERT INTO role (title, salary, department_id) VALUES (?,?,?)"
+        const sql = "INSERT INTO role (title, salary, department_id) VALUES (?,?,?)";
         const params = [answers.title, answers.salary, answers.department_id]
+        db.query(sql, params, function (err, results) {
+            if (err) throw err;
+            console.log(results);
+            mainMenu();
+        });
+    });
+};
+
+// ADD EMPLOYEE
+const addEmployee = () => {
+    inquirer.prompt([
+        {
+            // FIRST NAME
+            name: 'first_name',
+            type: 'input',
+            message: 'What is the first name of the employee?',
+            validate: (firstNameInput) => {
+                if (firstNameInput) {
+                    return true;
+                } else {
+                    console.log("You must enter a first name");
+                    return false;
+                }
+            },
+        },
+        {
+            // LAST NAME
+            name: 'last_name',
+            type: 'input',
+            message: 'What is the last name of the employee?',
+            validate: (lastNameInput) => {
+                if (lastNameInput) {
+                    return true;
+                } else {
+                    console.log("You must enter a last name");
+                    return false;
+                }
+            },
+        },
+        {
+            // ROLE ID
+            name: 'role_id',
+            type: 'input',
+            message: 'What is the role ID of the employee?',
+            validate: (employeeRoleIdInput) => {
+                if (employeeRoleIdInput) {
+                    return true;
+                } else {
+                    console.log("You must enter the role ID");
+                    return false;
+                }
+            },
+        },
+        {
+            // MANAGER ID
+            name: 'manager_id',
+            type: 'input',
+            message: 'What is the manager ID of the employee?',
+            validate: (managerNameIdInput) => {
+                if (managerNameIdInput) {
+                    return true;
+                } else {
+                    console.log("You must enter the manager ID");
+                    return false;
+                }
+            },
+        },
+    ])
+    .then((answers) => {
+        console.log(answers);
+        const sql = "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?)";
+        const params = [answers.first_name, answers.last_name, answers.role_id, answers.manager_id];
         db.query(sql, params, function (err, results) {
             if (err) throw err;
             console.log(results);
