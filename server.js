@@ -50,3 +50,21 @@ const viewDepartments = () => {
         mainMenu();
     });
 };
+
+// VIEW ROLES
+const viewRoles = () => {
+    db.query("SELECT * FROM role", function (err, results) {
+        if (err) throw err;
+        console.log(results);
+        mainMenu;
+    });
+};
+
+// VIEW EMPLOYEES
+const viewEmployees = () => {
+    db.query("SELECT * FROM employee", function (err, results) {
+        if (err) throw err;
+        console.log(results);
+        mainMenu;
+    });
+};
