@@ -226,3 +226,49 @@ const addEmployee = () => {
         });
     });
 };
+
+// UPDATE EMPLOYEE ROLE
+const updateEmployeeRole = () => {
+    inquirer.prompt([
+        {
+            // CHOOSE EMPLOYEE
+            name: 'employee_id',
+            type: 'input',
+            message: 'What is the ID of the employee you want to update?',
+            validate: (updateEmployeeRole) => {
+                if (updateEmployeeRole) {
+                    return true;
+                } else {
+                    console.log("You must enter the employee ID");
+                    return false;
+                }
+            },
+        },
+        {
+            // UPDATE EMPLOYEE ROLE
+            name: 'role_id',
+            type: 'input',
+            message: 'What is the role ID of the employee you want to update?',
+            validate: (updateRoleIdInput) => {
+                if (updateRoleIdInput) {
+                    return true;
+                } else {
+                    console.log("You must enter the role ID");
+                    return false;
+                }
+            },
+        },
+    ])
+    .then((answers) => {
+        console.log(answers);
+        const sql = "UPDATE employee SET role_id = ? WHERE employee_id = ?";
+        const params = [answers.role_id, answers.employee_id];
+        db.query(sql, params, function (err, results) {
+            if (err) throw err;
+            console.log(results);
+            mainMenu();
+        });
+    });
+};
+
+mainMenu();
