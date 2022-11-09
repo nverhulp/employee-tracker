@@ -272,7 +272,7 @@ const updateEmployeeRole = () => {
           db.query(sql, params, function (err, results) {
             if (err) throw err;
             console.log(results);
-            mainMenu();
+            mainMenu(); 
             });
         });
 };
