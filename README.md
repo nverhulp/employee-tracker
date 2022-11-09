@@ -13,7 +13,7 @@ Your assignment this week is to build a command-line application from scratch to
 
 ## Video Tutorial
 
-[Untitled_ Nov 8, 2022 9_33 PM.webm](https://user-images.githubusercontent.com/105401594/200747875-0de5922c-e23d-4a55-8413-dc78e2029a46.webm)
+[Video-Tutorial.webm](https://user-images.githubusercontent.com/105401594/200747940-5146dece-1edd-4fae-bcb1-3478312c3ec9.webm)
 
 ## Acceptance Criteria
 
