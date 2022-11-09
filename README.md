@@ -37,5 +37,11 @@ THEN I am prompted to select an employee to update and their new role and this i
 
 ## Comments
 
+1. User can view employees, roles and departments
+2. User can add an employee, role or department
+3. User can update an exisiting employee's role
 
 ## Credits
+
+1. Support from AskBCS 
+2. Support from TAs during office hours
