@@ -62,7 +62,7 @@ const viewRoles = () => {
     db.query("SELECT * FROM role", function (err, results) {
         if (err) throw err;
         console.log(results);
-        mainMenu;
+        mainMenu();
     });
 };
 
@@ -71,7 +71,7 @@ const viewEmployees = () => {
     db.query("SELECT * FROM employee", function (err, results) {
         if (err) throw err;
         console.log(results);
-        mainMenu;
+        mainMenu();
     });
 };
 
@@ -82,8 +82,8 @@ const addDepartment = () => {
             name: 'name',
             type: 'input',
             message: 'What is the name of the department?',
-            validate: (name) => {
-                if (name) {
+            validate: (depNameInput) => {
+                if (depNameInput) {
                     return true;
                 } else {
                     console.log("You must enter the department name");
@@ -93,8 +93,8 @@ const addDepartment = () => {
         },
     ])
         .then((answers) => {
-            const sql = 'INSERT INTO department (name) VALUES (?)';
-            const params = [answers.name];
+            const sql = 'INSERT INTO department (dep_name) VALUES (?)';
+            const params = [answers.name]
             db.query(sql, params, function (err, results) {
                 if (err) throw err;
                 console.log(results);
@@ -254,7 +254,7 @@ const updateEmployeeRole = () => {
             // UPDATE EMPLOYEE ROLE
             name: 'role_id',
             type: 'input',
-            message: 'What is the role ID of the employee you want to update?',
+            message: 'What is the new role ID?',
             validate: (updateRoleIdInput) => {
                 if (updateRoleIdInput) {
                     return true;
@@ -265,14 +265,14 @@ const updateEmployeeRole = () => {
             },
         },
     ])
-        .then((answers) => {
-            console.log(answers);
-            const sql = "UPDATE employee SET role_id = ? WHERE employee_id = ?";
-            const params = [answers.role_id, answers.employee_id];
-            db.query(sql, params, function (err, results) {
-                if (err) throw err;
-                console.log(results);
-                mainMenu();
+    .then((answers) => {
+        console.log(answers);
+        const sql = "UPDATE employee SET role_id = ? WHERE id = ?";
+        const params = [answers.role_id, answers.employee_id];
+          db.query(sql, params, function (err, results) {
+            if (err) throw err;
+            console.log(results);
+            mainMenu();
             });
         });
 };
